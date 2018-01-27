@@ -1,6 +1,10 @@
 Spring-Actuator-Config
 ======================
 
+[![Maven central](https://maven-badges.herokuapp.com/maven-central/com.ethlo.spring/spring-actuator-config/badge.svg)](http://repo1.maven.org/maven2/com/ethlo/spring/spring-actuator-config)
+[![Hex.pm](https://img.shields.io/hexpm/l/plug.svg)](LICENSE)
+[![Build Status](https://travis-ci.org/ethlo/spring-actuator-addons.svg?branch=master)](https://travis-ci.org/ethlo/spring-actuator-addons)
+
 Endpoint that returns the configuration properties along with the [Spring meta-data](https://docs.spring.io/spring-boot/docs/current/reference/html/configuration-metadata.html) to get nice descriptions and hints about the application's configuration parameters.
 
 ## How to use
