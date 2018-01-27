@@ -25,9 +25,12 @@ Activate the actuator end-point:
 @Bean
 public ConfigurationPropertiesEndpoint configEndpoint()
 {
+  // Make available under /<management.context-path>/config
   return new ConfigurationPropertiesEndpoint("config");
 }
 ```
+* https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-monitoring.html#production-ready-customizing-management-server-context-path
+
 ## Example data
 The following example data and screenshots are from the [geodata project](https://github.com/ethlo/geodata)
 
