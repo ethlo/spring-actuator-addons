@@ -1,7 +1,7 @@
 Spring-Actuator-Config
 ======================
 
-Endpoint that returns the configuration properties along with the [Spring meta-data](https://docs.spring.io/spring-boot/docs/current/reference/html/configuration-metadata.html) to get nice descriptions and hints about the applications configuration parameters.
+Endpoint that returns the configuration properties along with the [Spring meta-data](https://docs.spring.io/spring-boot/docs/current/reference/html/configuration-metadata.html) to get nice descriptions and hints about the application's configuration parameters.
 
 ## How to use
 
