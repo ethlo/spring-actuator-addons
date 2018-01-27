@@ -35,3 +35,5 @@ The following example data and screenshots are from the [geodata project](https:
 
 ### Data as displayed in custom (very simple) web UI
 ![Raw JSON data from actuator](doc/web-ui.png)
+
+This very [simple web-ui can be grabbed from here](doc/sample/config.html) and added as a static resource in your project as a starting point.
