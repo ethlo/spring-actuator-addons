@@ -1,12 +1,9 @@
 package com.ethlo.spring.actuator;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +17,8 @@ import org.springframework.boot.actuate.endpoint.AbstractEndpoint;
 import org.springframework.core.env.AbstractEnvironment;
 import org.springframework.core.env.EnumerablePropertySource;
 import org.springframework.core.env.MutablePropertySources;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.util.StringUtils;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -39,7 +38,7 @@ public class ConfigurationPropertiesEndpoint extends AbstractEndpoint<Map<String
     public static final String ADDITIONAL_PATH = "META-INF/additional-spring-configuration-metadata.json";
     public static final String PATH = "META-INF/spring-configuration-metadata.json";
     private static final String[] REGEX_PARTS = { "*", "$", "^", "+" };
-
+    
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     private boolean documentedOnly = false;
@@ -135,15 +134,10 @@ public class ConfigurationPropertiesEndpoint extends AbstractEndpoint<Map<String
         return false;
     }
 
-    private List<InputStream> loadResources(final String name) throws IOException
+    private Resource[] loadResources(final String name) throws IOException
     {
-        final List<InputStream> list = new ArrayList<>();
-        final Enumeration<URL> systemResources = ClassLoader.getSystemClassLoader().getResources(name);
-        while (systemResources.hasMoreElements())
-        {
-            list.add(systemResources.nextElement().openStream());
-        }
-        return list;
+        final PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+        return resolver.getResources("classpath*:" + name);
     }
 
     @Override
@@ -185,11 +179,11 @@ public class ConfigurationPropertiesEndpoint extends AbstractEndpoint<Map<String
         return Collections.singletonMap("properties", retVal.values());
     }
 
-    private void processMetaResource(final Map<String, PropertyDto> retVal, final List<InputStream> descs) throws IOException
+    private void processMetaResource(final Map<String, PropertyDto> retVal, final Resource[] resources) throws IOException
     {
-        for (InputStream d : descs)
+        for (Resource d : resources)
         {
-            final JsonNode rootNode = OBJECT_MAPPER.readTree(d);
+            final JsonNode rootNode = OBJECT_MAPPER.readTree(d.getInputStream());
             processProperties(retVal, rootNode);
             processValueHints(retVal, rootNode);
         }
