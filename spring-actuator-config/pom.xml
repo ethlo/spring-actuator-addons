@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.ethlo.spring</groupId>
 		<artifactId>spring-actuator-addons</artifactId>
-		<version>1.5.0</version>
+		<version>1.5.0.1</version>
 	</parent>
 	<artifactId>spring-actuator-config</artifactId>
 	<dependencies>
